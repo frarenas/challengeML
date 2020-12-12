@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.farenas.challengeml.ui.splash.SplashFragment"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.farenas.challengeml.ui.home.HomeFragment"
+        android:label="@string/title_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_SearchResultFragment"
+            app:destination="@id/searchResultFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_homeFragment_to_DetailFragment"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.farenas.challengeml.ui.searchresult.SearchResultFragment"
+        android:label="@string/title_products" >
+        <action
+            android:id="@+id/action_searchResultFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <argument
+            android:name="query"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.farenas.challengeml.ui.detail.DetailFragment"
+        android:label="@string/title_detail">
+        <argument
+            android:name="product"
+            app:argType="com.farenas.challengeml.data.model.Product" />
+    </fragment>
+</navigation>
