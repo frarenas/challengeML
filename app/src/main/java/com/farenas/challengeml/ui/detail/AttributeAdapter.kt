@@ -37,13 +37,11 @@ class AttributeAdapter @Inject constructor()
     }
 
     object AttibuteComparator : DiffUtil.ItemCallback<Attribute>() {
-        override fun areItemsTheSame(oldItem: Attribute, newItem: Attribute): Boolean {
-            return oldItem.productId == newItem.productId
+        override fun areItemsTheSame(oldItem: Attribute, newItem: Attribute): Boolean =
+                oldItem.productId == newItem.productId
                     && oldItem.name == newItem.name
-        }
 
-        override fun areContentsTheSame(oldItem: Attribute, newItem: Attribute): Boolean {
-            return oldItem == newItem
-        }
+        override fun areContentsTheSame(oldItem: Attribute, newItem: Attribute): Boolean =
+                oldItem == newItem
     }
 }

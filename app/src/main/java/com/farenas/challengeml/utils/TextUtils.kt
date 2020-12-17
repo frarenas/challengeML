@@ -7,7 +7,7 @@ class TextUtils {
     companion object {
         fun getCurrencyFormat(value: Double, currencyCode: String): String{
             val format = NumberFormat.getCurrencyInstance()
-            format.minimumFractionDigits = 0
+            format.minimumFractionDigits = 2
             format.maximumFractionDigits = 2
 
             format.currency = try {

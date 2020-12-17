@@ -2,8 +2,8 @@ package com.farenas.challengeml.ui.searchresult
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.farenas.challengeml.R
@@ -13,7 +13,7 @@ import com.farenas.challengeml.utils.TextUtils
 import javax.inject.Inject
 
 class ProductAdapter @Inject constructor()
-    : ListAdapter<Product, ProductAdapter.ViewHolder>(ProductComparator) {
+    : PagingDataAdapter<Product, ProductAdapter.ViewHolder>(ProductComparator) {
 
     private var listener: ((Product) -> Unit)? = null
 
@@ -35,30 +35,31 @@ class ProductAdapter @Inject constructor()
 
     class ViewHolder(private val itemBinding: ItemProductBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(result: Product, listener: ((item: Product) -> Unit)?) {
+        fun bind(product: Product?, listener: ((item: Product) -> Unit)?) {
             itemBinding.apply {
-                tvTitle.text = result.title
-                tvPrice.text = TextUtils.getCurrencyFormat(result.price, result.currencyId)
-                tvLocation.text = result.address?.stateName
-                ivProduct.load(result.thumbnail){
+                tvTitle.text = product?.title
+                tvPrice.text = product?.let {
+                        p -> TextUtils.getCurrencyFormat(p.price, p.currencyId)
+                }?: ""
+                tvLocation.text = product?.address?.stateName
+                ivProduct.load(product?.thumbnail){
                     size(250)
                     placeholder(R.drawable.ic_image_placeholder)
                     error(R.drawable.ic_image_placeholder)
                 }
-                ivProduct.contentDescription = result.title
+                ivProduct.contentDescription = product?.title
 
-                root.setOnClickListener{ listener?.invoke(result) }
+                product?.let { p -> root.setOnClickListener{ listener?.invoke(p) } }
+
             }
         }
     }
 
     object ProductComparator : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem.id == newItem.id
-        }
+        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean =
+                oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem == newItem
-        }
+        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean =
+                oldItem == newItem
     }
 }

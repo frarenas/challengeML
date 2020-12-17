@@ -89,6 +89,7 @@ class HomeFragment(
 
         viewModel.query.observe(viewLifecycleOwner, {
             it.getContentIfNotHandled()?.let { result ->
+                hideKeyboard()
                 findNavController().navigate(
                     HomeFragmentDirections.actionHomeFragmentToSearchResultFragment(result)
                 )

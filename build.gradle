@@ -33,12 +33,12 @@ buildscript {
         okhttp_version = '4.9.0'
         retrofit_version = '2.9.0'
         moshi_version = "1.11.0"
-
         //Coil
         coil_version = '1.1.0'
-
         //Room
-        room_version = '2.2.5'
+        room_version = '2.2.6'
+        //Paging
+        paging_version = "3.0.0-alpha10"
     }
 
 

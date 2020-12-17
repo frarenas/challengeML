@@ -12,7 +12,6 @@ import com.farenas.challengeml.data.model.mapper.ProductMapper
 import com.farenas.challengeml.utils.Constants
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 import kotlin.Exception
 
 class ProductRepositoryImpl(
@@ -44,7 +43,7 @@ class ProductRepositoryImpl(
                 productDao.upsert(product)
                 product.address?.let { addressDao.upsert(it) }
                 product.attributes?.let { attributeDao.upsert(it) }
-            }catch (e: Exception){  }
+            }catch (e: Exception){}
         }
     }
 }
